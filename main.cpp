@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <stdlib.h>
+#include <time.h>
 
 using namespace std;
 
@@ -13,15 +14,46 @@ void shellSortGapHalf(vector<int> &v);
 int main (){
   srand(time(NULL));  // Intialize srand seed
   vector<int> origV;
-	for(int i=0; i<1e3; i++){
+	for(int i=0; i<1000; i++){
     origV.push_back(rand() % 1000);
   }
-  vector<int> v = origV;
 
-  shellSortGapHalf(v);
+  vector<int> v1, v2, v3, v4, v5;
+  vector<double> t1, t2, t3, t4, t5;
 
-  for(auto it : v){
-    cout << it << " ";
+  v1.resize(1000);
+  v2.resize(1000);
+  v3.resize(1000);
+  v4.resize(1000);
+  v5.resize(1000);
+  for(int i=0; i<1000; i++){
+    for(int j=0; j<=i; j++){
+      v1[j] = v2[j] = v3[j] = v4[j] = v5[j] = origV[j];
+    }
+    clock_t t = clock();
+    selectionSort(v1);
+    t = clock() - t;
+    t1.push_back(t/CLOCKS_PER_SEC);
+
+    t = clock();
+    insertionSort(v2);
+    t = clock() - t;
+    t2.push_back(t/CLOCKS_PER_SEC);
+
+    t = clock();
+    bubbleSort(v3);
+    t = clock() - t;
+    t3.push_back(t/CLOCKS_PER_SEC);
+
+    t = clock();
+    shellSortGap3N(v4);
+    t = clock() - t;
+    t4.push_back(t/CLOCKS_PER_SEC);
+
+    t = clock();
+    shellSortGapHalf(v5);
+    t = clock() - t;
+    t5.push_back(t/CLOCKS_PER_SEC);
   }
 
   return 0;
@@ -67,7 +99,7 @@ void bubbleSort(vector<int> &v){
               swap(v[j], v[j+1]);
 }
 
-void shellSortGapp3N(vector<int> &v){
+void shellSortGap3N(vector<int> &v){
     int gap = 1;
     int i, j;
     while (gap < v.size()) {
