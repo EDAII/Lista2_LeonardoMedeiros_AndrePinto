@@ -64,6 +64,39 @@ ax.plot(xvector, plotShell3N, label='Shell Sort 3N+1 Time')
 pyplot.legend()
 pyplot.grid()
 
-ax.set_yticks([0.2, 0.4, 0.6])
+ax.set_yticks([0.2, 0.4, 0.6, 0.8, 1.0])
 
-pyplot.show()
+pyplot.show() #Plot all graphs
+
+fig, ax = pyplot.subplots()
+
+pyplot.xlabel('Number of elements')
+pyplot.ylabel('Time to compute')
+
+
+ax.plot(xvector, plotInsertion, label='Insertion Sort Time')
+ax.plot(xvector, plotSelection, label='Selection Sort Time')
+ax.plot(xvector, plotBubble, label='Bubble Sort Time')
+
+pyplot.legend()
+pyplot.grid()
+
+ax.set_yticks([0.2, 0.4, 0.6, 0.8, 1.0])
+
+pyplot.show() #Plot the slowest
+
+fig, ax = pyplot.subplots()
+
+pyplot.xlabel('Number of elements')
+pyplot.ylabel('Time to compute')
+
+
+ax.plot(xvector, plotShellHalf, label='Shell Sort Half Time')
+ax.plot(xvector, plotShell3N, label='Shell Sort 3N+1 Time')
+
+pyplot.legend()
+pyplot.grid()
+
+ax.set_yticks([0.0015, 0.003, 0.0045])
+
+pyplot.show() #Plot the fastest
