@@ -2,6 +2,7 @@
 #include <vector>
 #include <stdlib.h>
 #include <time.h>
+#include <fstream>
 
 using namespace std;
 
@@ -14,47 +15,78 @@ void shellSortGapHalf(vector<int> &v);
 int main (){
   srand(time(NULL));  // Intialize srand seed
   vector<int> origV;
-	for(int i=0; i<1000; i++){
-    origV.push_back(rand() % 1000);
+  for(int i=0; i<10000; i++){
+    origV.push_back(rand() % 10000);
   }
 
   vector<int> v1, v2, v3, v4, v5;
   vector<double> t1, t2, t3, t4, t5;
 
-  v1.resize(1000);
-  v2.resize(1000);
-  v3.resize(1000);
-  v4.resize(1000);
-  v5.resize(1000);
-  for(int i=0; i<1000; i++){
+  for(int i=0; i<10000; i++){
     for(int j=0; j<=i; j++){
-      v1[j] = v2[j] = v3[j] = v4[j] = v5[j] = origV[j];
+      v1.push_back(origV[j]);
+      v2.push_back(origV[j]);
+      v3.push_back(origV[j]);
+      v4.push_back(origV[j]);
+      v5.push_back(origV[j]);
     }
+
     clock_t t = clock();
     selectionSort(v1);
     t = clock() - t;
-    t1.push_back(t/CLOCKS_PER_SEC);
+    t1.push_back((double)t/CLOCKS_PER_SEC);
 
     t = clock();
     insertionSort(v2);
     t = clock() - t;
-    t2.push_back(t/CLOCKS_PER_SEC);
+    t2.push_back((double)t/CLOCKS_PER_SEC);
 
     t = clock();
     bubbleSort(v3);
     t = clock() - t;
-    t3.push_back(t/CLOCKS_PER_SEC);
+    t3.push_back((double)t/CLOCKS_PER_SEC);
 
     t = clock();
     shellSortGap3N(v4);
     t = clock() - t;
-    t4.push_back(t/CLOCKS_PER_SEC);
+    t4.push_back((double)t/CLOCKS_PER_SEC);
 
     t = clock();
     shellSortGapHalf(v5);
     t = clock() - t;
-    t5.push_back(t/CLOCKS_PER_SEC);
+    t5.push_back((double)t/CLOCKS_PER_SEC);
+
+    v1.clear();
+    v2.clear();
+    v3.clear();
+    v4.clear();
+    v5.clear();
   }
+
+	ofstream o1("selectionSort");
+	for(auto it: t1){
+		o1 << it << " ";
+	}
+
+	ofstream o2("insertionSort");
+	for(auto it: t2){
+		o2 << it << " ";
+	}
+
+	ofstream o3("bubbleSort");
+	for(auto it: t3){
+		o3 << it << " ";
+	}
+
+	ofstream o4("shellSortGap3N");
+	for(auto it: t4){
+		o4 << it << " ";
+	}
+
+	ofstream o5("shellSortGapHalf");
+	for(auto it: t5){
+		o5 << it << " ";
+	}
 
   return 0;
 }
