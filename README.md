@@ -12,7 +12,7 @@ O projeto tem duas etapas:
 ### Geração de Dados
 1. Faça o clone deste projeto com ```$ git clone https://github.com/EDAII/Lista2_LeonardoMedeiros_AndrePinto.git ```
 2. Acesse a pasta do projeto via terminal
-3. Execute os seguintes comandos ``` $ g++ main.cpp -o prog -std=c++11 ```
+3. Execute os seguintes comandos ``` $ g++ main.cpp -o prog -std=c++11 -static```
 4. Rode a aplicação com ``` $ ./prog``` 
 
 OBS: Esta aplicação pode demorar cerca de 2 horas.
